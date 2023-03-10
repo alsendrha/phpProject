@@ -2,7 +2,7 @@
 // include = 연결 시켜주는거
 include "../connection.php";
 
-$sqlQuery = "SELECT * FROM user_board";
+$sqlQuery = "SELECT * FROM user_board ORDER BY board_id DESC";
 
 $resultQuery = $connection->query($sqlQuery);
 
