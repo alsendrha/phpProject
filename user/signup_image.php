@@ -2,10 +2,11 @@
 include '../connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $boardTitle = $_POST["board_title"];
-    $boardWriter = $_POST["board_writer"];
-    $userProfile = $_POST["user_profile"];
-    $boardContent = $_POST["board_content"];
+    $userName = $_POST["user_name"];
+    $userEmail = $_POST["user_email"];
+    $userNickName = $_POST["user_nickname"];
+    // md5 식별불가 바이너리 포맷으로 변환
+    $userPassword = md5($_POST["user_password"]);
 
     // Check if file exists
     if (isset($_FILES['image'])) {
@@ -14,18 +15,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $file_name = $_FILES['image']['name'];
             $file_temp = $_FILES['image']['tmp_name'];
             $file_size = $_FILES['image']['size'];
-            $image_path = 'uploads/' . $file_name;
-            move_uploaded_file($file_temp, $image_path);
+            $user_image = 'profile/' . $file_name;
+            move_uploaded_file($file_temp, $user_image);
         } else {
             echo json_encode(array("success" => false));
             exit();
         }
     }
 
-    $sqlQuery = "INSERT INTO user_board SET board_title = '$boardTitle', board_writer = '$boardWriter', user_profile = '$userProfile',
-                board_content = '$boardContent'";
-    if (isset($image_path)) {
-        $sqlQuery .= ", image_path = '$image_path'";
+    $sqlQuery = "INSERT INTO user_table SET user_name = '$userName', user_email = '$userEmail', user_password = '$userPassword', user_nickname = '$userNickName'";
+    if (isset($user_image)) {
+        $sqlQuery .= ", user_image = '$user_image'";
     }
     $sqlQuery .= ", date = NOW()";
 

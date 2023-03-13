@@ -8,7 +8,7 @@ $boardContent = $_POST["board_content"];
 
 
 $sqlQuery = "INSERT INTO user_board SET board_title = '$boardTitle', board_writer = '$boardWriter',
- board_content = '$boardContent', date = NOW()";
+ board_content = '$boardContent'";
 
 $resultQuery = $connection->query($sqlQuery);
 
