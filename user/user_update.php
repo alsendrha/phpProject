@@ -11,10 +11,10 @@ $data = json_decode($json, true);
 // 게시글 번호, 제목, 내용을 추출
 $userId = $data["user_id"];
 $userNickname = $data["user_nickname"];
-$userPassword = md5($data["user_password"]);
+// $userPassword = md5($data["user_password"]);
 
 // UPDATE 쿼리 실행
-$sqlQuery = "UPDATE user_table SET user_password = '$userPassword', user_nickname = '$userNickname' WHERE user_id = $userId";
+$sqlQuery = "UPDATE user_table SET  user_nickname = '$userNickname' WHERE user_id = $userId";
 $resultQuery = $connection->query($sqlQuery);
 
 // 쿼리 실행 결과를 클라이언트에게 반환
